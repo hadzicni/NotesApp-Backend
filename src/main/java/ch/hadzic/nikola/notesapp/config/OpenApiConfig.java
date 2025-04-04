@@ -14,6 +14,6 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT",
         scheme = "bearer"
 )
-public class OpenApi30Config {
+public class OpenApiConfig {
 
 }
