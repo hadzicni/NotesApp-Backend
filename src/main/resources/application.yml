@@ -1,0 +1,25 @@
+server.port: 9090
+
+spring:
+  app:
+    name: NotesApp
+    version: 1.0.0
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notesapp
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/ILV
+
+springdoc:
+  swagger-ui:
+    path: /

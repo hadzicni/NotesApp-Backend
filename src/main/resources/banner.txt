@@ -1,0 +1,20 @@
+${AnsiColor.BRIGHT_YELLOW}
+________              _____                    ________            _____     _______
+__  ___/_________________(_)_____________ _    ___  __ )_____________  /_    ___    |_______________
+_____ \___  __ \_  ___/_  /__  __ \_  __ `/    __  __  |  __ \  __ \  __/    __  /| |__  __ \__  __ \
+____/ /__  /_/ /  /   _  / _  / / /  /_/ /     _  /_/ // /_/ / /_/ / /_      _  ___ |_  /_/ /_  /_/ /
+/____/ _  .___//_/    /_/  /_/ /_/_\__, /      /_____/ \____/\____/\__/      /_/  |_|  .___/_  .___/
+       /_/                        /____/                                            /_/     /_/
+${AnsiColor.YELLOW}N I K O L A   H A D Z I C
+${AnsiColor.DEFAULT}
+
+${AnsiColor.BRIGHT_GREEN}Application:         ${AnsiColor.WHITE}${spring.app.name}
+${AnsiColor.BRIGHT_GREEN}Version:             ${AnsiColor.WHITE}${spring.app.version}
+${AnsiColor.BRIGHT_GREEN}Spring Boot:         ${AnsiColor.WHITE}${spring-boot.version}
+${AnsiColor.BRIGHT_GREEN}Java:                ${AnsiColor.WHITE}${java.version}
+${AnsiColor.BRIGHT_YELLOW}User:                ${AnsiColor.WHITE}${user.name}
+${AnsiColor.BRIGHT_YELLOW}Dir:                 ${AnsiColor.WHITE}${user.dir}
+${AnsiColor.BRIGHT_YELLOW}Encoding:            ${AnsiColor.WHITE}${file.encoding}
+${AnsiColor.BRIGHT_YELLOW}Time Zone:           ${AnsiColor.WHITE}${user.timezone}
+${AnsiColor.BRIGHT_YELLOW}OS:                  ${AnsiColor.WHITE}${os.name} ${os.version} (${os.arch})
+${AnsiColor.DEFAULT}
