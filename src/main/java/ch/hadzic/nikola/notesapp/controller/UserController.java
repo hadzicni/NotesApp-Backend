@@ -1,5 +1,7 @@
 package ch.hadzic.nikola.notesapp.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,10 @@ import java.util.Map;
 @Tag(name = "User", description = "Current user info")
 public class UserController {
 
+    @Operation(summary = "Returns information about the currently authenticated user")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "User info retrieved successfully")
+    })
     @GetMapping("/me")
     public ResponseEntity<Map<String, String>> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

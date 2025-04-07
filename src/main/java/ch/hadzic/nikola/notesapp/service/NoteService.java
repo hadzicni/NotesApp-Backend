@@ -66,6 +66,9 @@ public class NoteService {
 
         existingNote.setTitle(updatedNote.getTitle());
         existingNote.setContent(updatedNote.getContent());
+        existingNote.setArchived(updatedNote.isArchived());
+        existingNote.setFavorite(updatedNote.isFavorite());
+
         existingNote.setUpdatedAt(LocalDateTime.now());
 
         logger.info("Updating note with id: {}", updatedNote.getId());

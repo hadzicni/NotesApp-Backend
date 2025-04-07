@@ -92,8 +92,9 @@ public class NoteController {
     @RolesAllowed(Roles.Delete)
     @DeleteMapping("/{id}")
     public ResponseEntity<Note> delete(@PathVariable Long id) {
+        Note deletedNote = noteService.getNoteById(id);
         noteService.deleteNote(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(deletedNote);
     }
 
 
