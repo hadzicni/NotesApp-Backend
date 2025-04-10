@@ -1,6 +1,7 @@
 package ch.hadzic.nikola.notesapp.controller;
 
 import ch.hadzic.nikola.notesapp.security.Roles;
+import ch.hadzic.nikola.notesapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -43,5 +44,23 @@ public class UserController {
         userInfo.put("aud", jwt.getClaimAsString("aud"));
 
         return ResponseEntity.ok(userInfo);
+    }
+
+    @Operation(summary = "Returns the current user's username")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Username retrieved successfully")
+    })
+    @GetMapping("/username")
+    public ResponseEntity<String> getCurrentUsername() {
+        return ResponseEntity.ok(UserService.getUsername());
+    }
+
+    @Operation(summary = "Returns the current user's ID")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "User ID retrieved successfully")
+    })
+    @GetMapping("/id")
+    public ResponseEntity<String> getCurrentUserId() {
+        return ResponseEntity.ok(UserService.getCurrentUserId());
     }
 }
