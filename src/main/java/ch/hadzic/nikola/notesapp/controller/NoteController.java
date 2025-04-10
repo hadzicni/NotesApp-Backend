@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
@@ -20,7 +19,7 @@ import java.util.List;
 @RestController
 @SecurityRequirement(name = "bearerAuth")
 @Validated
-@Tag(name = "Notes", description = "API for managing notes")
+@Tag(name = "Notes Controller", description = "API for managing notes")
 @RequestMapping("/api/notes")
 public class NoteController {
 
@@ -43,7 +42,7 @@ public class NoteController {
     }
 
 
-    @Operation(summary = "Gives all notes for the current user")
+    @Operation(summary = "Gives all not archived notes for the current user")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Notes retrieved successfully"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No notes found")

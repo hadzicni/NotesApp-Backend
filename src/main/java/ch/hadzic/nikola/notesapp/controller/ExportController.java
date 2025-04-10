@@ -3,7 +3,10 @@ package ch.hadzic.nikola.notesapp.controller;
 import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
 import ch.hadzic.nikola.notesapp.util.PdfExportUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import java.util.List;
 @RestController
 @SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/export")
+@Tag(name = "Export Controller", description = "Export notes as PDF")
 public class ExportController {
 
     private final NoteRepository noteRepository;
@@ -25,6 +29,11 @@ public class ExportController {
         this.noteRepository = noteRepository;
     }
 
+    @Operation(summary = "Export all notes as PDF")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "PDF file generated successfully"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/notes/pdf")
     public ResponseEntity<byte[]> exportNotesAsPdf() {
         List<Note> notes = noteRepository.findAll();
@@ -36,6 +45,12 @@ public class ExportController {
                 .body(pdfBytes);
     }
 
+    @Operation(summary = "Export a specific note as PDF")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "PDF file generated successfully"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Note not found"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/notes/pdf/{id}")
     public ResponseEntity<byte[]> exportNoteAsPdf(@PathVariable Long id) {
         Note note = noteRepository.findById(id)

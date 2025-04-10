@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.w3c.dom.Text;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class Note {
     @NotEmpty
     private String title;
 
-    @Size(max = 400)
+    @Size(max = 2500)
     @Schema(description = "The content of the note")
     private String content;
 

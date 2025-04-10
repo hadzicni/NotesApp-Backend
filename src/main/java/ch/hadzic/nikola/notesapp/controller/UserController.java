@@ -21,7 +21,7 @@ import java.util.Map;
 @SecurityRequirement(name = "bearerAuth")
 @RolesAllowed(Roles.Read)
 @RequestMapping("/api/user")
-@Tag(name = "User", description = "Current user info")
+@Tag(name = "User Controller", description = "Current user info")
 public class UserController {
 
     @Operation(summary = "Returns information about the currently authenticated user")

@@ -26,7 +26,7 @@ import java.util.Map;
 @SecurityRequirement(name = "bearerAuth")
 @RolesAllowed(Roles.Admin)
 @RequestMapping("/api/meta")
-@Tag(name = "Meta", description = "App metadata")
+@Tag(name = "Meta Controller", description = "App metadata")
 public class MetaController {
 
     @Value("${spring.app.name}")
