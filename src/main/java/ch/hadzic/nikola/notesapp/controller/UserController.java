@@ -1,9 +1,11 @@
 package ch.hadzic.nikola.notesapp.controller;
 
+import ch.hadzic.nikola.notesapp.security.Roles;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @SecurityRequirement(name = "bearerAuth")
+@RolesAllowed(Roles.Read)
 @RequestMapping("/api/user")
 @Tag(name = "User", description = "Current user info")
 public class UserController {
@@ -32,6 +35,12 @@ public class UserController {
 
         Map<String, String> userInfo = new HashMap<>();
         userInfo.put("username", jwt.getClaimAsString("preferred_username"));
+        userInfo.put("email", jwt.getClaimAsString("email") != null ? jwt.getClaimAsString("email") : "Not set");
+        userInfo.put("given_name", jwt.getClaimAsString("given_name") != null ? jwt.getClaimAsString("given_name") : "Not set");
+        userInfo.put("family_name", jwt.getClaimAsString("family_name") != null ? jwt.getClaimAsString("family_name") : "Not set");
+        userInfo.put("sub", jwt.getClaimAsString("sub"));
+        userInfo.put("iss", jwt.getClaimAsString("iss"));
+        userInfo.put("aud", jwt.getClaimAsString("aud"));
 
         return ResponseEntity.ok(userInfo);
     }

@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.execption;
+package ch.hadzic.nikola.notesapp.execptions;
 
 public class NoteNotFoundException extends RuntimeException {
     public NoteNotFoundException(String message) {

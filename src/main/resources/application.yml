@@ -23,6 +23,3 @@ spring:
 springdoc:
   swagger-ui:
     path: /
-
-app:
-  name: NotesApp

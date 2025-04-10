@@ -1,6 +1,6 @@
-package ch.hadzic.nikola.notesapp.repository;
+package ch.hadzic.nikola.notesapp.data.repository;
 
-import ch.hadzic.nikola.notesapp.entity.Note;
+import ch.hadzic.nikola.notesapp.data.entity.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

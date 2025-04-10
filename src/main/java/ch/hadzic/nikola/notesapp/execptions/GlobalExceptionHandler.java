@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.execption;
+package ch.hadzic.nikola.notesapp.execptions;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,8 +1,8 @@
 package ch.hadzic.nikola.notesapp.service;
 
-import ch.hadzic.nikola.notesapp.entity.Note;
-import ch.hadzic.nikola.notesapp.execption.NoteNotFoundException;
-import ch.hadzic.nikola.notesapp.repository.NoteRepository;
+import ch.hadzic.nikola.notesapp.data.entity.Note;
+import ch.hadzic.nikola.notesapp.execptions.NoteNotFoundException;
+import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;

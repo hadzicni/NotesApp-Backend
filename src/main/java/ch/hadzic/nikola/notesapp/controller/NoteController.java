@@ -1,6 +1,6 @@
 package ch.hadzic.nikola.notesapp.controller;
 
-import ch.hadzic.nikola.notesapp.entity.Note;
+import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.security.Roles;
 import ch.hadzic.nikola.notesapp.service.NoteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +35,7 @@ public class NoteController {
     })
     @RolesAllowed(Roles.Create)
     @PostMapping
-    public ResponseEntity<Note> create(@Valid @RequestBody Note note) {
+    public ResponseEntity<Note> createNote(@Valid @RequestBody Note note) {
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
         note.setUserId(userId);
         return ResponseEntity.ok(noteService.createNote(note));
@@ -91,7 +91,7 @@ public class NoteController {
     })
     @RolesAllowed(Roles.Delete)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Note> delete(@PathVariable Long id) {
+    public ResponseEntity<Note> deleteNote(@PathVariable Long id) {
         Note deletedNote = noteService.getNoteById(id);
         noteService.deleteNote(id);
         return ResponseEntity.ok(deletedNote);

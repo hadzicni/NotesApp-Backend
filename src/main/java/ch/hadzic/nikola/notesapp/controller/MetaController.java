@@ -25,6 +25,7 @@ import java.util.Map;
 
 @RestController
 @SecurityRequirement(name = "bearerAuth")
+@RolesAllowed(Roles.Admin)
 @RequestMapping("/api/meta")
 @Tag(name = "Meta", description = "App metadata")
 public class MetaController {
@@ -35,10 +36,13 @@ public class MetaController {
     @Value("${spring.app.version}")
     private String appVersion;
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     private final Instant startTime = Instant.now();
+
+    public MetaController(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Operation(summary = "Returns basic app info (name and version)")
     @ApiResponses({
