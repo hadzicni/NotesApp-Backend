@@ -10,9 +10,9 @@
     </parent>
     <groupId>ch.hadzic.nikola</groupId>
     <artifactId>notesapp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>notesapp</name>
-    <description>notesapp</description>
+    <description>Notes App for the üK M295</description>
     <url/>
     <licenses>
         <license/>

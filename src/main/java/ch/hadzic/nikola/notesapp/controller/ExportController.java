@@ -1,7 +1,7 @@
 package ch.hadzic.nikola.notesapp.controller;
 
 import ch.hadzic.nikola.notesapp.data.entity.Note;
-import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
+import ch.hadzic.nikola.notesapp.service.NoteService;
 import ch.hadzic.nikola.notesapp.util.PdfExportUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -23,10 +23,10 @@ import java.util.List;
 @Tag(name = "Export Controller", description = "Export notes as PDF")
 public class ExportController {
 
-    private final NoteRepository noteRepository;
+    private final NoteService noteService;
 
-    public ExportController(NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
+    public ExportController(NoteService noteService) {
+        this.noteService = noteService;
     }
 
     @Operation(summary = "Export all notes as PDF")
@@ -36,7 +36,7 @@ public class ExportController {
     })
     @GetMapping("/notes/pdf")
     public ResponseEntity<byte[]> exportNotesAsPdf() {
-        List<Note> notes = noteRepository.findAll();
+        List<Note> notes = noteService.getNotesForCurrentUser();
         byte[] pdfBytes = PdfExportUtil.exportNotesToPdf(notes);
 
         return ResponseEntity.ok()
@@ -53,8 +53,7 @@ public class ExportController {
     })
     @GetMapping("/notes/pdf/{id}")
     public ResponseEntity<byte[]> exportNoteAsPdf(@PathVariable Long id) {
-        Note note = noteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Note not found"));
+        Note note = noteService.getNoteById(id);
         byte[] pdfBytes = PdfExportUtil.exportNoteToPdf(note);
 
         return ResponseEntity.ok()
