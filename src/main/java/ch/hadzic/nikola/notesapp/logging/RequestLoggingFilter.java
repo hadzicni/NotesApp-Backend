@@ -32,9 +32,19 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         String remoteAddr = wrappedRequest.getRemoteAddr();
         String sessionId = wrappedRequest.getRequestedSessionId();
         String contentType = wrappedRequest.getContentType();
+        String bodyContent = wrappedRequest.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
 
-        log.info("Request: method={}, uri={}, query={}, remoteAddr={}, sessionId={}, contentType={}",
-                method, uri, queryString, remoteAddr, sessionId, contentType);
+        log.info("""
+        Request:
+        Information:
+          Method       : {}
+          URI          : {}
+          Query        : {}
+          Remote Addr  : {}
+          Session ID   : {}
+          Content-Type : {}
+          Body         : {}
+        """, method, uri, queryString, remoteAddr, sessionId, contentType, bodyContent);
 
         filterChain.doFilter(wrappedRequest, response);
     }
