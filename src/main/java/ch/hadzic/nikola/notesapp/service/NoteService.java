@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,14 +25,15 @@ public class NoteService {
     @Transactional
     public Note createNote(Note note) {
         String userId = getCurrentUserId();
-        note.setCreatedAt(LocalDateTime.now());
-        note.setUpdatedAt(LocalDateTime.now());
         note.setUserId(userId);
+
+        logger.info("Creating note for user: {}", userId);
         return noteRepository.save(note);
     }
 
     public List<Note> getNotesForCurrentUser() {
         String userId = getCurrentUserId();
+
         logger.info("Fetching notes for user: {}", userId);
         return noteRepository.findByUserId(userId);
     }
@@ -68,8 +68,6 @@ public class NoteService {
         existingNote.setContent(updatedNote.getContent());
         existingNote.setArchived(updatedNote.isArchived());
         existingNote.setFavorite(updatedNote.isFavorite());
-
-        existingNote.setUpdatedAt(LocalDateTime.now());
 
         logger.info("Updating note with id: {}", updatedNote.getId());
         return noteRepository.save(existingNote);
