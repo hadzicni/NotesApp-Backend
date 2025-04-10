@@ -27,10 +27,10 @@ public class Note {
     private String content;
 
     @Column(name = "is_favorite")
-    private boolean isFavorite;
+    private boolean favorite;
 
     @Column(name = "is_archived")
-    private boolean isArchived;
+    private boolean archived;
 
     @Schema(hidden = true)
     @CreationTimestamp

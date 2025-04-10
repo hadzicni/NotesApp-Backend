@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
@@ -51,6 +52,30 @@ public class NoteController {
     @GetMapping
     public ResponseEntity<List<Note>> getNotes() {
         List<Note> notes = noteService.getNotesForCurrentUser();
+        return ResponseEntity.ok(notes);
+    }
+
+    @Operation(summary = "Gives all archived notes for the current user")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Archived notes retrieved successfully"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No archived notes found")
+    })
+    @RolesAllowed(Roles.Read)
+    @GetMapping("/archived")
+    public ResponseEntity<List<Note>> getArchivedNotes() {
+        List<Note> notes = noteService.getArchivedNotesForCurrentUser();
+        return ResponseEntity.ok(notes);
+    }
+
+    @Operation(summary = "Gives all favourite notes for the current user")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Favourite notes retrieved successfully"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No favourite notes found")
+    })
+    @RolesAllowed(Roles.Read)
+    @GetMapping("/favourite")
+    public ResponseEntity<List<Note>> getFavouriteNotes() {
+        List<Note> notes = noteService.getFavouriteNotesForCurrentUser();
         return ResponseEntity.ok(notes);
     }
 

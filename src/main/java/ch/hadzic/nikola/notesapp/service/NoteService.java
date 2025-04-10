@@ -29,7 +29,19 @@ public class NoteService {
     public List<Note> getNotesForCurrentUser() {
         String userId = getCurrentUserId();
 
-        return noteRepository.findByUserId(userId);
+        return noteRepository.findByUserIdAndArchivedIsFalse(userId);
+    }
+
+    public List<Note> getFavouriteNotesForCurrentUser() {
+        String userId = getCurrentUserId();
+
+        return noteRepository.findByUserIdAndFavoriteIsTrue(userId);
+    }
+
+    public List<Note> getArchivedNotesForCurrentUser() {
+        String userId = getCurrentUserId();
+
+        return noteRepository.findByUserIdAndArchivedIsTrue(userId);
     }
 
     public Note getNoteById(Long id) {
