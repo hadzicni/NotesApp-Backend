@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok(userInfo);
     }
 
-    @Operation(summary = "Returns the current user's username")
+    @Operation(summary = "Returns the current user's username (Only for internal use)")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Username retrieved successfully")
     })
@@ -55,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok(UserService.getUsername());
     }
 
-    @Operation(summary = "Returns the current user's ID")
+    @Operation(summary = "Returns the current user's ID (Only for internal use)")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "User ID retrieved successfully")
     })
