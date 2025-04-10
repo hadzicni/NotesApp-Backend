@@ -4,15 +4,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-public class Note {
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Note implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,16 +27,19 @@ public class Note {
     private Long id;
 
     @NotEmpty
+    @Size(max = 255)
     private String title;
 
     @Size(max = 2500)
     private String content;
 
-    @Column(name = "is_favorite")
-    private boolean favorite;
+    @Schema(defaultValue = "false")
+    @Column(name = "is_favorite", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean favorite = false;
 
-    @Column(name = "is_archived")
-    private boolean archived;
+    @Schema(defaultValue = "false")
+    @Column(name = "is_archived", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean archived = false;
 
     @Schema(hidden = true)
     @CreationTimestamp
@@ -42,6 +52,6 @@ public class Note {
     private LocalDateTime updatedAt;
 
     @Schema(hidden = true)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private String userId;
 }
