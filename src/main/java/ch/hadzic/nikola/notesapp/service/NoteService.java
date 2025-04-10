@@ -3,8 +3,6 @@ package ch.hadzic.nikola.notesapp.service;
 import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.execptions.NoteNotFoundException;
 import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +11,6 @@ import java.util.List;
 
 @Service
 public class NoteService {
-
-    private static final Logger logger = LoggerFactory.getLogger(NoteService.class);
 
     private final NoteRepository noteRepository;
 
@@ -27,14 +23,12 @@ public class NoteService {
         String userId = getCurrentUserId();
         note.setUserId(userId);
 
-        logger.info("Creating note for user: {}", userId);
         return noteRepository.save(note);
     }
 
     public List<Note> getNotesForCurrentUser() {
         String userId = getCurrentUserId();
 
-        logger.info("Fetching notes for user: {}", userId);
         return noteRepository.findByUserId(userId);
     }
 
@@ -43,7 +37,6 @@ public class NoteService {
                 .orElseThrow(() -> new NoteNotFoundException("Note not found"));
 
         validateOwnership(note);
-        logger.info("Fetching note with id: {}", id);
         return note;
     }
 
@@ -54,7 +47,6 @@ public class NoteService {
 
         validateOwnership(note);
         noteRepository.delete(note);
-        logger.info("Deleted note with id: {}", id);
     }
 
     @Transactional
@@ -69,7 +61,6 @@ public class NoteService {
         existingNote.setArchived(updatedNote.isArchived());
         existingNote.setFavorite(updatedNote.isFavorite());
 
-        logger.info("Updating note with id: {}", updatedNote.getId());
         return noteRepository.save(existingNote);
     }
 
