@@ -11,6 +11,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Note entity representing a note in the application.
+ * It contains fields for title, content, favorite status, archived status,
+ * creation timestamp, update timestamp, and user ID.
+ */
 @Entity
 @Getter
 @Setter

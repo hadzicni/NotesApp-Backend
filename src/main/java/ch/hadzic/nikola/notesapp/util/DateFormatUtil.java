@@ -3,6 +3,9 @@ package ch.hadzic.nikola.notesapp.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Utility class for formatting dates.
+ */
 public class DateFormatUtil {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");

@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.security;
+package ch.hadzic.nikola.notesapp.config.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * CustomAccessDeniedHandler is a Spring component that handles access denied exceptions.
+ * It sends a 403 Forbidden response with a custom JSON message.
+ */
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override

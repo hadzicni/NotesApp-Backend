@@ -1,12 +1,13 @@
 package ch.hadzic.nikola.notesapp.controller;
 
-import ch.hadzic.nikola.notesapp.security.Roles;
-import ch.hadzic.nikola.notesapp.service.UserService;
+import ch.hadzic.nikola.notesapp.config.security.Roles;
+import ch.hadzic.nikola.notesapp.data.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.RolesAllowed;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * UserController handles user-related operations.
+ * It provides endpoints to retrieve information about the currently authenticated user.
+ * This controller is secured with JWT authentication.
+ */
 @RestController
 @SecurityRequirement(name = "bearerAuth")
 @RolesAllowed(Roles.Read)
@@ -32,7 +38,10 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<Map<String, String>> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        if (!(authentication.getPrincipal() instanceof Jwt jwt)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         Map<String, String> userInfo = new HashMap<>();
         userInfo.put("username", jwt.getClaimAsString("preferred_username"));

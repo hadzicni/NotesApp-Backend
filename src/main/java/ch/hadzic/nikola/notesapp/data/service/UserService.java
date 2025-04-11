@@ -1,10 +1,13 @@
-package ch.hadzic.nikola.notesapp.service;
+package ch.hadzic.nikola.notesapp.data.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for managing user-related operations.
+ */
 @Service
 public class UserService {
     /**

@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.security;
+package ch.hadzic.nikola.notesapp.config.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * CustomAuthenticationEntryPoint is a Spring component that handles authentication errors.
+ * It sends a 401 Unauthorized response with a custom JSON message.
+ */
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override

@@ -6,6 +6,11 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * OpenApiConfig is a configuration class that sets up OpenAPI documentation for the application.
+ * It includes information such as the title, version, and description of the API.
+ * Additionally, it defines a security scheme for bearer token authentication.
+ */
 @Configuration
 @OpenAPIDefinition(info = @Info(title = "NotesApp API Documentation", version = "v1.0.0", description = "NotesApp API für das üK Modul 295"))
 @SecurityScheme(

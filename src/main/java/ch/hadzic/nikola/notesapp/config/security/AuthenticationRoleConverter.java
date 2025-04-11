@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.security;
+package ch.hadzic.nikola.notesapp.config.security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
@@ -15,6 +15,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Converter to extract roles from JWT token and convert them into Spring Security authorities.
+ */
 public class AuthenticationRoleConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     private final JwtGrantedAuthoritiesConverter defaultGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 

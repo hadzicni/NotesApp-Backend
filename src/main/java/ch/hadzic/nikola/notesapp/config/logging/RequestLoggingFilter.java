@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.logging;
+package ch.hadzic.nikola.notesapp.config.logging;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,6 +17,12 @@ import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 
+/**
+ * RequestLoggingFilter is a filter that logs the details of incoming HTTP requests.
+ * It extends OncePerRequestFilter to ensure that it is executed once per request.
+ * The filter logs the HTTP method, URI, query string, remote address, session ID,
+ * content type, and body of the request.
+ */
 @Slf4j
 @Component
 public class RequestLoggingFilter extends OncePerRequestFilter {

@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ch.hadzic.nikola.notesapp.security.Roles;
+import ch.hadzic.nikola.notesapp.config.security.Roles;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -22,6 +22,11 @@ import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * MetaController handles metadata and health check endpoints for the application.
+ * It provides information about the application, server uptime, and database connectivity.
+ * This controller is secured with JWT authentication.
+ */
 @RestController
 @SecurityRequirement(name = "bearerAuth")
 @RolesAllowed(Roles.Admin)

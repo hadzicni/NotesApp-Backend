@@ -1,7 +1,7 @@
 package ch.hadzic.nikola.notesapp.util;
 
 import ch.hadzic.nikola.notesapp.data.entity.Note;
-import ch.hadzic.nikola.notesapp.service.UserService;
+import ch.hadzic.nikola.notesapp.data.service.UserService;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.draw.LineSeparator;
@@ -9,6 +9,9 @@ import com.lowagie.text.pdf.draw.LineSeparator;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+/**
+ * Utility class for exporting notes to PDF format.
+ */
 public class PdfExportUtil {
 
     public static byte[] exportNotesToPdf(List<Note> notes) {

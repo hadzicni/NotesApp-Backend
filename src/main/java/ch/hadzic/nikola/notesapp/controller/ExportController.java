@@ -1,7 +1,7 @@
 package ch.hadzic.nikola.notesapp.controller;
 
 import ch.hadzic.nikola.notesapp.data.entity.Note;
-import ch.hadzic.nikola.notesapp.service.NoteService;
+import ch.hadzic.nikola.notesapp.data.service.NoteService;
 import ch.hadzic.nikola.notesapp.util.PdfExportUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+/**
+ * ExportController handles the export of notes as PDF files.
+ * It provides endpoints to export all notes or a specific note as a PDF file.
+ * This controller is secured with JWT authentication.
+ */
 @RestController
 @SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/export")
@@ -54,6 +59,10 @@ public class ExportController {
     @GetMapping("/notes/pdf/{id}")
     public ResponseEntity<byte[]> exportNoteAsPdf(@PathVariable Long id) {
         Note note = noteService.getNoteById(id);
+        if (note == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         byte[] pdfBytes = PdfExportUtil.exportNoteToPdf(note);
 
         return ResponseEntity.ok()

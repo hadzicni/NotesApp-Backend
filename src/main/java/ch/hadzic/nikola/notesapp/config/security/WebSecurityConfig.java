@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.security;
+package ch.hadzic.nikola.notesapp.config.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * WebSecurityConfig is a configuration class that sets up security for the application.
+ * It configures authentication, authorization, CSRF protection, and CORS settings.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true)

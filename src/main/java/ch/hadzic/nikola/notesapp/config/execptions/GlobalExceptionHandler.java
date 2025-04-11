@@ -1,4 +1,4 @@
-package ch.hadzic.nikola.notesapp.execptions;
+package ch.hadzic.nikola.notesapp.config.execptions;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * GlobalExceptionHandler is a class that handles exceptions globally in the application.
+ * It provides a centralized way to handle exceptions and return appropriate responses.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

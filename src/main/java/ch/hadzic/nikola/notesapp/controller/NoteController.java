@@ -1,8 +1,8 @@
 package ch.hadzic.nikola.notesapp.controller;
 
 import ch.hadzic.nikola.notesapp.data.entity.Note;
-import ch.hadzic.nikola.notesapp.security.Roles;
-import ch.hadzic.nikola.notesapp.service.NoteService;
+import ch.hadzic.nikola.notesapp.config.security.Roles;
+import ch.hadzic.nikola.notesapp.data.service.NoteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * NoteController handles CRUD operations for notes.
+ * It provides endpoints to create, read, update, and delete notes.
+ * This controller is secured with JWT authentication.
+ */
 @RestController
 @SecurityRequirement(name = "bearerAuth")
 @Validated
@@ -105,6 +110,9 @@ public class NoteController {
     public ResponseEntity<Note> updateNote(@PathVariable Long id, @RequestBody @Valid Note note) {
         note.setId(id);
         Note updated = noteService.updateNote(note);
+        if (updated == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updated);
     }
 
@@ -117,10 +125,10 @@ public class NoteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Note> deleteNote(@PathVariable Long id) {
         Note deletedNote = noteService.getNoteById(id);
+        if (deletedNote == null) {
+            return ResponseEntity.notFound().build();
+        }
         noteService.deleteNote(id);
         return ResponseEntity.ok(deletedNote);
     }
-
-
-
 }
