@@ -1,5 +1,6 @@
 package ch.hadzic.nikola.notesapp.controller;
 
+import ch.hadzic.nikola.notesapp.config.security.Roles;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ch.hadzic.nikola.notesapp.config.security.Roles;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -34,15 +34,12 @@ import java.util.Map;
 @Tag(name = "Meta Controller", description = "App metadata and health check")
 public class MetaController {
 
+    private final DataSource dataSource;
+    private final Instant startTime = Instant.now();
     @Value("${spring.app.name}")
     private String appName;
-
     @Value("${spring.app.version}")
     private String appVersion;
-
-    private final DataSource dataSource;
-
-    private final Instant startTime = Instant.now();
 
     public MetaController(DataSource dataSource) {
         this.dataSource = dataSource;

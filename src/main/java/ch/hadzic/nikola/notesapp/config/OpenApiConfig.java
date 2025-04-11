@@ -20,8 +20,6 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer"
 )
 public class OpenApiConfig {
-    // This class is used to configure OpenAPI documentation for the application.
-    // The @OpenAPIDefinition annotation is used to define the API information such as title, version, and description.
-    // The @SecurityScheme annotation is used to define the security scheme for the API, in this case, a bearer token authentication scheme.
-    // The class is annotated with @Configuration to indicate that it is a Spring configuration class.
+    // No additional configuration is needed here.
+    // The annotations above will automatically generate the OpenAPI documentation.
 }

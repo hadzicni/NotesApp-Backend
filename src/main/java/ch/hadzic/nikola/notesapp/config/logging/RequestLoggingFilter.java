@@ -1,21 +1,22 @@
 package ch.hadzic.nikola.notesapp.config.logging;
 
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import jakarta.servlet.ReadListener;
-import jakarta.servlet.ServletInputStream;
-import jakarta.servlet.http.HttpServletRequestWrapper;
 
 /**
  * RequestLoggingFilter is a filter that logs the details of incoming HTTP requests.
@@ -42,16 +43,16 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         String bodyContent = wrappedRequest.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
 
         log.info("""
-        Request:
-        Information:
-          Method       : {}
-          URI          : {}
-          Query        : {}
-          Remote Addr  : {}
-          Session ID   : {}
-          Content-Type : {}
-          Body         : {}
-        """, method, uri, queryString, remoteAddr, sessionId, contentType, bodyContent);
+                Request:
+                Information:
+                  Method       : {}
+                  URI          : {}
+                  Query        : {}
+                  Remote Addr  : {}
+                  Session ID   : {}
+                  Content-Type : {}
+                  Body         : {}
+                """, method, uri, queryString, remoteAddr, sessionId, contentType, bodyContent);
 
         filterChain.doFilter(wrappedRequest, response);
     }
@@ -81,7 +82,8 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
                 }
 
                 @Override
-                public void setReadListener(ReadListener readListener) {}
+                public void setReadListener(ReadListener readListener) {
+                }
 
                 @Override
                 public int read() {

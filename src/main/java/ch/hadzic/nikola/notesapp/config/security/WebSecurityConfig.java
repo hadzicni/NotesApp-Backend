@@ -25,9 +25,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableMethodSecurity(jsr250Enabled = true)
 public class WebSecurityConfig {
 
-    @Value("${spring.app.name}")
-    private String appName;
-
     private static final String[] AUTH_WHITELIST = {
             "/",
             "/v3/api-docs/**",
@@ -35,6 +32,8 @@ public class WebSecurityConfig {
             "/swagger-ui.html",
             "/v3/api-docs.yaml"
     };
+    @Value("${spring.app.name}")
+    private String appName;
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http,

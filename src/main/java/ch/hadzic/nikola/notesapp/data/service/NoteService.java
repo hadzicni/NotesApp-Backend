@@ -1,7 +1,7 @@
 package ch.hadzic.nikola.notesapp.data.service;
 
-import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.config.execptions.NoteNotFoundException;
+import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
