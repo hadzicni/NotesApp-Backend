@@ -30,7 +30,8 @@ public class WebSecurityConfig {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
-            "/v3/api-docs.yaml"
+            "/v3/api-docs.yaml",
+            "/api/auth/token"
     };
     @Value("${spring.app.name}")
     private String appName;
@@ -49,13 +50,13 @@ public class WebSecurityConfig {
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(new AuthenticationRoleConverter(appName))))
                 .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/auth/token")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestHandler))
                 .cors(cors -> corsConfigurer())
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(authEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler));
-
         return http.build();
     }
 
