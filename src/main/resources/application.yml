@@ -21,7 +21,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://keycloak.nikolahadzic.net/realms/NotesApp
+          issuer-uri: https://auth.nikolahadzic.net/realms/NotesApp
 
 keycloak:
   token-uri: http://localhost:8080/realms/NotesApp/protocol/openid-connect/token
