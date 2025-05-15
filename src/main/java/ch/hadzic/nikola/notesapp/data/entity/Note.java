@@ -1,5 +1,6 @@
 package ch.hadzic.nikola.notesapp.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * Note entity representing a note in the application.
@@ -37,6 +39,14 @@ public class Note implements Serializable {
 
     @Size(max = 2500)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "notebook_id")
+    private Notebook notebook;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Tag> tags;
 
     @Schema(defaultValue = "false")
     @Column(name = "is_favorite", columnDefinition = "BOOLEAN DEFAULT FALSE")

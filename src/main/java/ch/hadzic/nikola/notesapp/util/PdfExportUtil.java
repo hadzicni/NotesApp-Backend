@@ -1,7 +1,6 @@
 package ch.hadzic.nikola.notesapp.util;
 
 import ch.hadzic.nikola.notesapp.data.entity.Note;
-import ch.hadzic.nikola.notesapp.data.service.UserService;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.draw.LineSeparator;
@@ -30,7 +29,6 @@ public class PdfExportUtil {
 
             for (Note note : notes) {
                 document.add(new Paragraph("Title: " + note.getTitle(), titleFont));
-                document.add(new Paragraph("Created by: " + UserService.getUsername(), bodyFont));
                 document.add(new Paragraph("Content: " + note.getContent(), bodyFont));
                 document.add(new Paragraph("Created at: " + DateFormatUtil.format(note.getCreatedAt()), bodyFont));
                 document.add(new Paragraph(" "));
@@ -60,7 +58,6 @@ public class PdfExportUtil {
             document.add(new Paragraph("Note", titleFont));
             document.add(new Paragraph(" "));
             document.add(new Paragraph("Title: " + note.getTitle(), titleFont));
-            document.add(new Paragraph("Created by: " + UserService.getUsername(), bodyFont));
             document.add(new Paragraph("Content: " + note.getContent(), bodyFont));
             document.add(new Paragraph("Created at " + DateFormatUtil.format(note.getCreatedAt()), bodyFont));
 

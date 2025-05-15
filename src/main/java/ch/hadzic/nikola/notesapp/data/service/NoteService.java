@@ -66,17 +66,22 @@ public class NoteService {
 
     @Transactional
     public Note updateNote(Note updatedNote) {
-        Note existingNote = noteRepository.findById(updatedNote.getId())
-                .orElseThrow(() -> new NoteNotFoundException("Note not found"));
+        Note existing = getNoteById(updatedNote.getId());
 
-        validateOwnership(existingNote);
+        existing.setTitle(updatedNote.getTitle());
+        existing.setContent(updatedNote.getContent());
+        existing.setFavorite(updatedNote.isFavorite());
+        existing.setArchived(updatedNote.isArchived());
 
-        existingNote.setTitle(updatedNote.getTitle());
-        existingNote.setContent(updatedNote.getContent());
-        existingNote.setArchived(updatedNote.isArchived());
-        existingNote.setFavorite(updatedNote.isFavorite());
+        if (updatedNote.getNotebook() != null) {
+            existing.setNotebook(updatedNote.getNotebook());
+        }
 
-        return noteRepository.save(existingNote);
+        if (updatedNote.getTags() != null) {
+            existing.setTags(updatedNote.getTags());
+        }
+
+        return noteRepository.save(existing);
     }
 
     private void validateOwnership(Note note) {

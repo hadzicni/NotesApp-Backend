@@ -105,8 +105,8 @@ public class NoteController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Note updated successfully"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Note not found")
     })
-    @RolesAllowed(Roles.Update)
     @PatchMapping("/{id}")
+    @RolesAllowed(Roles.Update)
     public ResponseEntity<Note> updateNote(@PathVariable Long id, @RequestBody @Valid Note note) {
         note.setId(id);
         Note updated = noteService.updateNote(note);
