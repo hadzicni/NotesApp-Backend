@@ -51,7 +51,7 @@ public class NotebookController {
     @RolesAllowed(Roles.Update)
     @PatchMapping("/{id}")
     public ResponseEntity<Notebook> update(@PathVariable Long id, @RequestBody @Valid Notebook notebook) {
-        if (!notebookService.getById(id).isPresent()) {
+        if (notebookService.getById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         notebook.setId(id);
@@ -61,7 +61,7 @@ public class NotebookController {
     @RolesAllowed(Roles.Delete)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (!notebookService.getById(id).isPresent()) {
+        if (notebookService.getById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         notebookService.delete(id);

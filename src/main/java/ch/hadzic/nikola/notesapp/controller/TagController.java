@@ -50,7 +50,7 @@ public class TagController {
     @RolesAllowed(Roles.Update)
     @PatchMapping("/{id}")
     public ResponseEntity<Tag> update(@PathVariable Long id, @RequestBody @Valid Tag tag) {
-        if (!tagService.getById(id).isPresent()) {
+        if (tagService.getById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         tag.setId(id);
@@ -60,7 +60,7 @@ public class TagController {
     @RolesAllowed(Roles.Delete)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (!tagService.getById(id).isPresent()) {
+        if (tagService.getById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         tagService.delete(id);
