@@ -3,8 +3,12 @@ package ch.hadzic.nikola.notesapp.data.service;
 import ch.hadzic.nikola.notesapp.config.execptions.NoteNotFoundException;
 import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.data.entity.Tag;
+import ch.hadzic.nikola.notesapp.data.entity.Todo;
 import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
 import ch.hadzic.nikola.notesapp.data.repository.TagRepository;
+import ch.hadzic.nikola.notesapp.data.repository.TodoRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +25,12 @@ public class NoteService {
 
     private final NoteRepository noteRepository;
     private final TagRepository tagRepository;
+    private final TodoRepository todoRepository;
 
-    public NoteService(NoteRepository noteRepository, TagRepository tagRepository) {
+    public NoteService(NoteRepository noteRepository, TagRepository tagRepository, TodoRepository todoRepository) {
         this.noteRepository = noteRepository;
         this.tagRepository = tagRepository;
+        this.todoRepository = todoRepository;
     }
 
     @Transactional
@@ -63,10 +69,7 @@ public class NoteService {
 
     @Transactional
     public void deleteNote(Long id) {
-        Note note = noteRepository.findById(id)
-                .orElseThrow(() -> new NoteNotFoundException("Note not found"));
-
-        validateOwnership(note);
+        Note note = noteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Note not found"));
         noteRepository.delete(note);
     }
 

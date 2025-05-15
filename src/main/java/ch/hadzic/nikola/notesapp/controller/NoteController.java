@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -121,14 +122,17 @@ public class NoteController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Note deleted successfully"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Note not found")
     })
-    @RolesAllowed(Roles.Delete)
     @DeleteMapping("/{id}")
+    @RolesAllowed(Roles.Delete)
     public ResponseEntity<Note> deleteNote(@PathVariable Long id) {
-        Note deletedNote = noteService.getNoteById(id);
-        if (deletedNote == null) {
+        try {
+            Note deletedNote = noteService.getNoteById(id);
+            noteService.deleteNote(id);
+            return ResponseEntity.ok(deletedNote);
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-        noteService.deleteNote(id);
-        return ResponseEntity.ok(deletedNote);
     }
+
+
 }

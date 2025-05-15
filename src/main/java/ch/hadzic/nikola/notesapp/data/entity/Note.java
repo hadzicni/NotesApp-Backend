@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -39,6 +40,10 @@ public class Note implements Serializable {
 
     @Size(max = 2500)
     private String content;
+
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Todo> todos;
 
     @ManyToOne
     @JoinColumn(name = "notebook_id")
