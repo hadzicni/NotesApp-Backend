@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(new AuthenticationRoleConverter(appName))))
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/auth/token")
+                        .ignoringRequestMatchers("/api/auth/token", "/api/attachments/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestHandler))
                 .cors(cors -> corsConfigurer())
@@ -67,7 +67,9 @@ public class WebSecurityConfig {
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS")
-                        .allowedOrigins("http://localhost:4200");
+                        .allowedOrigins("http://localhost:4200")
+                        .allowCredentials(true)
+                        .allowedHeaders("*");
             }
         };
     }

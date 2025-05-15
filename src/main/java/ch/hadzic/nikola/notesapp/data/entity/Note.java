@@ -44,8 +44,12 @@ public class Note implements Serializable {
     @JoinColumn(name = "notebook_id")
     private Notebook notebook;
 
-    @ManyToMany
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "note_tag",
+            joinColumns = @JoinColumn(name = "note_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
     private Set<Tag> tags;
 
     @Schema(defaultValue = "false")

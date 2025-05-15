@@ -2,12 +2,16 @@ package ch.hadzic.nikola.notesapp.data.service;
 
 import ch.hadzic.nikola.notesapp.config.execptions.NoteNotFoundException;
 import ch.hadzic.nikola.notesapp.data.entity.Note;
+import ch.hadzic.nikola.notesapp.data.entity.Tag;
 import ch.hadzic.nikola.notesapp.data.repository.NoteRepository;
+import ch.hadzic.nikola.notesapp.data.repository.TagRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Service class for managing notes.
@@ -16,9 +20,11 @@ import java.util.List;
 public class NoteService {
 
     private final NoteRepository noteRepository;
+    private final TagRepository tagRepository;
 
-    public NoteService(NoteRepository noteRepository) {
+    public NoteService(NoteRepository noteRepository, TagRepository tagRepository) {
         this.noteRepository = noteRepository;
+        this.tagRepository = tagRepository;
     }
 
     @Transactional
@@ -77,8 +83,24 @@ public class NoteService {
             existing.setNotebook(updatedNote.getNotebook());
         }
 
+        // Bidirektionale Pflege der Tags
         if (updatedNote.getTags() != null) {
-            existing.setTags(updatedNote.getTags());
+            // Entferne bestehende Verknüpfungen
+            if (existing.getTags() != null) {
+                for (Tag oldTag : existing.getTags()) {
+                    oldTag.getNotes().remove(existing);
+                }
+            }
+
+            // Neue Tags setzen und bidirektional pflegen
+            Set<Tag> persistentTags = new HashSet<>();
+            for (Tag tag : updatedNote.getTags()) {
+                Tag persistentTag = tagRepository.findById(tag.getId())
+                        .orElseThrow(() -> new RuntimeException("Tag nicht gefunden: " + tag.getId()));
+                persistentTags.add(persistentTag);
+                persistentTag.getNotes().add(existing);
+            }
+            existing.setTags(persistentTags);
         }
 
         return noteRepository.save(existing);
