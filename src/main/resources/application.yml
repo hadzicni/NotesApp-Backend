@@ -13,7 +13,7 @@ spring:
       ddl-auto: update
     open-in-view: false
   datasource:
-    url: jdbc:postgresql://87.106.129.154:5432/notesapp
+    url: jdbc:postgresql://localhost:5432/notesapp
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
@@ -21,7 +21,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://auth.nikolahadzic.net/realms/NotesApp
+          issuer-uri: http://localhost:8080/realms/NotesApp
 
 springdoc:
   swagger-ui:

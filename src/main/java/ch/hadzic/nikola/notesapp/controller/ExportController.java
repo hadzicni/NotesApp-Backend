@@ -4,6 +4,7 @@ import ch.hadzic.nikola.notesapp.data.entity.Note;
 import ch.hadzic.nikola.notesapp.data.service.NoteService;
 import ch.hadzic.nikola.notesapp.util.PdfExportUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,8 +37,8 @@ public class ExportController {
 
     @Operation(summary = "Export all notes as PDF")
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "PDF file generated successfully"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "PDF file generated successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/notes/pdf")
     public ResponseEntity<byte[]> exportNotesAsPdf() {
@@ -52,9 +53,9 @@ public class ExportController {
 
     @Operation(summary = "Export a specific note as PDF")
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "PDF file generated successfully"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Note not found"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "PDF file generated successfully"),
+            @ApiResponse(responseCode = "404", description = "Note not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/notes/pdf/{id}")
     public ResponseEntity<byte[]> exportNoteAsPdf(@PathVariable Long id) {

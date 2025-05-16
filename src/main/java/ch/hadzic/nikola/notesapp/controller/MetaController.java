@@ -2,6 +2,7 @@ package ch.hadzic.nikola.notesapp.controller;
 
 import ch.hadzic.nikola.notesapp.config.security.Roles;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,7 +48,7 @@ public class MetaController {
 
     @Operation(summary = "Returns basic app info (name and version)")
     @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "App info retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "App info retrieved successfully")
     })
     @GetMapping("/info")
     public ResponseEntity<Map<String, String>> getInfo() {
@@ -59,7 +60,7 @@ public class MetaController {
 
     @Operation(summary = "Simple ping endpoint to test API availability")
     @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Pong returned successfully")
+            @ApiResponse(responseCode = "200", description = "Pong returned successfully")
     })
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
@@ -68,7 +69,7 @@ public class MetaController {
 
     @Operation(summary = "Returns the server uptime in HH:mm:ss.SSS format")
     @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Uptime retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Uptime retrieved successfully")
     })
     @GetMapping("/uptime")
     public ResponseEntity<String> getUptime() {
@@ -83,7 +84,7 @@ public class MetaController {
 
     @Operation(summary = "Returns the current server time")
     @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Server time retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Server time retrieved successfully")
     })
     @GetMapping("/time")
     public ResponseEntity<ZonedDateTime> getServerTime() {
@@ -92,8 +93,8 @@ public class MetaController {
 
     @Operation(summary = "Checks database connectivity")
     @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Database connection OK"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "503", description = "Database connection failed")
+            @ApiResponse(responseCode = "200", description = "Database connection OK"),
+            @ApiResponse(responseCode = "503", description = "Database connection failed")
     })
     @GetMapping("/health/db")
     public ResponseEntity<String> dbHealth() {
