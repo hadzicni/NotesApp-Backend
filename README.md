@@ -2,7 +2,7 @@
 
 A full-featured **Spring Boot** backend API for a note-taking application. Supports notebooks, notes, tags, todos, PDF export, and advanced user roles. Designed for extensibility and clean RESTful architecture.
 
-![Java](https://img.shields.io/badge/Java-17+-blue?logo=java)
+![Java](https://img.shields.io/badge/Java-21-blue?logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
