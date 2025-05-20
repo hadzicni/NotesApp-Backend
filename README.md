@@ -24,7 +24,7 @@ A full-featured **Spring Boot** backend API for a note-taking application. Suppo
 
 ### Prerequisites
 
-- Java 17+
+- Java 21+
 - Maven 3.8+
 - IDE: IntelliJ / VS Code / Eclipse
 
